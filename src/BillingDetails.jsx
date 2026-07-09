@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { challenges } from "./constants/challengeDatas";
 import apiRequestHandler from "./utils/apiRequestHandler";
 import { generatePassword } from "./utils/generatePassword";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 
 let group;
 
@@ -102,7 +102,7 @@ const BillingDetails = () => {
 					investor_pass: generatePassword(),
 					amount: variables?.balance,
 					Account: variables?.account,
-					FirstName: `Foxx Funded - ${sanitizedChallengeName} (${challengeStage})  ${variables?.first} ${variables?.last}`,
+					FirstName: `NF - ${sanitizedChallengeName} (${challengeStage})  ${variables?.first} ${variables?.last}`,
 					LastName: variables?.last,
 					Leverage: 30,
 					Group: group,
