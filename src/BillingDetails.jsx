@@ -16,8 +16,8 @@ const BillingDetails = () => {
 	const challengeStage = selectedChallenge?.currentPhase;
 
 	const inputClass =
-		"w-full rounded-xl border border-white/10 bg-[#171717] px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30";
-	const labelClass = "text-sm font-semibold text-white";
+		"w-full rounded-xl border border-purple-400/20 bg-black/50 px-4 py-3 text-sm text-white shadow-inner shadow-purple-950/20 outline-none transition placeholder:text-gray-500 focus:border-purple-300 focus:bg-purple-950/20 focus:ring-2 focus:ring-purple-500/30";
+	const labelClass = "text-sm font-semibold text-purple-50";
 	const errorClass = "text-sm font-medium text-red-400";
 
 	if (challengeStage === "phase1") {
@@ -26,6 +26,8 @@ const BillingDetails = () => {
 		group = "ch\\m2\\contest.S\\2";
 	} else if (challengeStage === "funded") {
 		group = "ch\\m2\\contest.S\\3";
+	} else {
+		group = "";
 	}
 
 	const {
@@ -34,6 +36,13 @@ const BillingDetails = () => {
 		reset,
 		formState: { errors },
 	} = useForm();
+
+	const handleClear = () => {
+		reset();
+		setSelectedChallenge(null);
+		setResult(null);
+		setSubmitError("");
+	};
 
 	const createUser = useMutation({
 		mutationFn: (data) => apiRequestHandler("/users/normal-register", "POST", data),
@@ -117,11 +126,6 @@ const BillingDetails = () => {
 					Leverage: 30,
 					Group: group,
 				};
-
-				// If account is provided, send it. If not, keep normal auto-create flow.
-				if (variables?.account) {
-					mt5SignUpData.Account = variables.account;
-				}
 
 				const createUser = await apiRequestHandler("/users/create-user", "POST", mt5SignUpData);
 
@@ -223,30 +227,40 @@ const BillingDetails = () => {
 			email: data.email,
 			first: data.first,
 			last: data.last,
-			account: data.account?.trim() || "",
 			balance: Number(data.balance),
 			challengeData: selectedChallenge,
 		};
 
 		await createUser.mutateAsync(accountCreationData);
-
-		reset();
-		setSelectedChallenge(null);
 	};
 
 	return (
-		<section className="min-h-screen bg-black px-4 py-10 text-white">
-			<div className="mx-auto max-w-[1200px] rounded-3xl border border-white/10 bg-[#0f0f10] p-6 shadow-2xl shadow-purple-950/30 sm:p-8 lg:p-10">
-				<div className="border-b border-white/10 pb-6">
-					<h1 className="text-3xl font-bold text-white sm:text-4xl">Give Away MT5 Account</h1>
-					<p className="mt-2 text-sm text-gray-400">
-						Create MT5 giveaway accounts with a clean and fast workflow.
-					</p>
+		<section className="min-h-screen bg-[radial-gradient(circle_at_top_left,#321047_0%,#0b0011_36%,#030006_100%)] px-4 py-10 text-white">
+			<div className="mx-auto max-w-[1200px] rounded-3xl border border-purple-400/20 bg-black/60 p-6 shadow-2xl shadow-purple-950/50 backdrop-blur sm:p-8 lg:p-10">
+				<div className="flex flex-col gap-5 border-b border-purple-400/20 pb-6 sm:flex-row sm:items-start sm:justify-between">
+					<div>
+						<p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-300">
+							Neura Funding
+						</p>
+						<h1 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
+							Give Away MT5 Account
+						</h1>
+						<p className="mt-2 text-sm text-gray-400">
+							Create MT5 giveaway accounts with a clean and fast workflow.
+						</p>
+					</div>
+
+					<button
+						type="button"
+						onClick={handleClear}
+						className="rounded-xl border border-purple-300/40 bg-purple-500/10 px-5 py-2.5 text-sm font-semibold text-purple-100 shadow-lg shadow-purple-950/20 transition duration-300 hover:border-purple-200 hover:bg-purple-500/20">
+						Clear
+					</button>
 				</div>
 
 				<div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
 					<div className="space-y-6">
-						<div className="rounded-2xl border border-white/10 bg-black/35 p-6">
+						<div className="rounded-2xl border border-purple-400/20 bg-[#09000d]/80 p-6 shadow-xl shadow-purple-950/25">
 							<h2 className="text-xl font-bold text-white">User Information</h2>
 							<p className="mt-1 text-sm text-gray-400">
 								Enter the basic details for the user account.
@@ -303,21 +317,7 @@ const BillingDetails = () => {
 									</div>
 								</div>
 
-								<div className="space-y-2">
-									<label className={labelClass}>Account</label>
-									<input
-										type="text"
-										placeholder="Optional account number"
-										{...register("account")}
-										className={inputClass}
-									/>
-									<p className="text-xs text-gray-500">
-										If you enter an account number, it will be sent with the MT5 create-user
-										request. If empty, account creation will work normally.
-									</p>
-								</div>
-
-								<div className="rounded-2xl border border-white/10 bg-black/35 p-5">
+								<div className="rounded-2xl border border-purple-400/20 bg-purple-950/20 p-5">
 									<h2 className="text-xl font-bold text-white">Challenge Setup</h2>
 									<p className="mt-1 text-sm text-gray-400">Choose the challenge.</p>
 
@@ -350,7 +350,7 @@ const BillingDetails = () => {
 								<button
 									type="submit"
 									disabled={createUser.isPending}
-									className="w-full rounded-xl bg-purple-600 px-10 py-3 font-bold text-white shadow-lg shadow-purple-900/30 transition duration-300 hover:bg-purple-500 disabled:cursor-not-allowed disabled:bg-purple-900 disabled:text-gray-400">
+									className="w-full rounded-xl bg-gradient-to-r from-purple-700 to-purple-500 px-10 py-3 font-bold text-white shadow-lg shadow-purple-900/40 transition duration-300 hover:from-purple-600 hover:to-purple-400 disabled:cursor-not-allowed disabled:from-purple-950 disabled:to-purple-950 disabled:text-gray-400">
 									{createUser.isPending ? "Submitting..." : "Give Away Account"}
 								</button>
 							</form>
@@ -358,7 +358,7 @@ const BillingDetails = () => {
 					</div>
 
 					<div className="space-y-6">
-						<div className="rounded-2xl border border-white/10 bg-black/35 p-6">
+						<div className="rounded-2xl border border-purple-400/20 bg-[#09000d]/80 p-6 shadow-xl shadow-purple-950/25">
 							<h2 className="text-xl font-bold text-white">Summary</h2>
 							<p className="mt-1 text-sm text-gray-400">
 								Review account creation details before submitting.
@@ -394,15 +394,13 @@ const BillingDetails = () => {
 						</div>
 
 						{result && (
-							<div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/30 p-6">
-								<h3 className="text-xl font-bold text-emerald-300">
-									Account assigned successfully
-								</h3>
-								<p className="mt-2 text-sm text-emerald-50">
+							<div className="rounded-2xl border border-purple-300/40 bg-purple-950/30 p-6 shadow-xl shadow-purple-950/30">
+								<h3 className="text-xl font-bold text-purple-200">Account assigned successfully</h3>
+								<p className="mt-2 text-sm text-purple-50">
 									MT5 account was created and assigned successfully.
 								</p>
 
-								<div className="mt-5 rounded-xl border border-emerald-500/20 bg-black/35 p-4 text-sm">
+								<div className="mt-5 rounded-xl border border-purple-300/20 bg-black/50 p-4 text-sm">
 									<p className="text-gray-300">
 										Account: <span className="font-bold text-white">{result.account}</span>
 									</p>
@@ -419,9 +417,9 @@ const BillingDetails = () => {
 						)}
 
 						{submitError && (
-							<div className="rounded-2xl border border-red-500/30 bg-red-950/30 p-6">
+							<div className="rounded-2xl border border-red-500/40 bg-black/45 p-6 shadow-xl shadow-red-950/20">
 								<h3 className="text-xl font-bold text-red-300">Account creation failed</h3>
-								<p className="mt-2 text-sm text-red-50">{submitError}</p>
+								<p className="mt-2 text-sm text-red-100">{submitError}</p>
 							</div>
 						)}
 					</div>
