@@ -16,8 +16,8 @@ const BillingDetails = () => {
 	const challengeStage = selectedChallenge?.currentPhase;
 
 	const inputClass =
-		"w-full rounded-xl border border-purple-400/20 bg-black/50 px-4 py-3 text-sm text-white shadow-inner shadow-purple-950/20 outline-none transition placeholder:text-gray-500 focus:border-purple-300 focus:bg-purple-950/20 focus:ring-2 focus:ring-purple-500/30";
-	const labelClass = "text-sm font-semibold text-purple-50";
+		"w-full rounded-xl border border-white/10 bg-[#101114] px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-violet-400/70 focus:bg-[#15121a] focus:ring-2 focus:ring-violet-500/20";
+	const labelClass = "text-sm font-semibold text-zinc-100";
 	const errorClass = "text-sm font-medium text-red-400";
 
 	if (challengeStage === "phase1") {
@@ -235,17 +235,17 @@ const BillingDetails = () => {
 	};
 
 	return (
-		<section className="min-h-screen bg-[radial-gradient(circle_at_top_left,#321047_0%,#0b0011_36%,#030006_100%)] px-4 py-10 text-white">
-			<div className="mx-auto max-w-[1200px] rounded-3xl border border-purple-400/20 bg-black/60 p-6 shadow-2xl shadow-purple-950/50 backdrop-blur sm:p-8 lg:p-10">
-				<div className="flex flex-col gap-5 border-b border-purple-400/20 pb-6 sm:flex-row sm:items-start sm:justify-between">
+		<section className="min-h-screen bg-[#08090c] px-4 py-10 text-white">
+			<div className="mx-auto max-w-[1180px] rounded-3xl border border-white/10 bg-[#0d0e12] p-6 shadow-2xl shadow-black/50 sm:p-8 lg:p-10">
+				<div className="flex flex-col gap-5 border-b border-white/10 pb-6 sm:flex-row sm:items-start sm:justify-between">
 					<div>
-						<p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-300">
+						<p className="text-sm font-semibold uppercase tracking-[0.28em] text-violet-300">
 							Neura Funding
 						</p>
-						<h1 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
+						<h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
 							Give Away MT5 Account
 						</h1>
-						<p className="mt-2 text-sm text-gray-400">
+						<p className="mt-2 max-w-xl text-sm text-zinc-400">
 							Create MT5 giveaway accounts with a clean and fast workflow.
 						</p>
 					</div>
@@ -253,16 +253,16 @@ const BillingDetails = () => {
 					<button
 						type="button"
 						onClick={handleClear}
-						className="rounded-xl border border-purple-300/40 bg-purple-500/10 px-5 py-2.5 text-sm font-semibold text-purple-100 shadow-lg shadow-purple-950/20 transition duration-300 hover:border-purple-200 hover:bg-purple-500/20">
+						className="rounded-xl border border-white/10 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-300 hover:border-violet-400/40 hover:bg-violet-500/10">
 						Clear
 					</button>
 				</div>
 
 				<div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
 					<div className="space-y-6">
-						<div className="rounded-2xl border border-purple-400/20 bg-[#09000d]/80 p-6 shadow-xl shadow-purple-950/25">
+						<div className="rounded-2xl border border-white/10 bg-[#111217] p-6 shadow-xl shadow-black/30">
 							<h2 className="text-xl font-bold text-white">User Information</h2>
-							<p className="mt-1 text-sm text-gray-400">
+							<p className="mt-1 text-sm text-zinc-400">
 								Enter the basic details for the user account.
 							</p>
 
@@ -304,10 +304,10 @@ const BillingDetails = () => {
 									</div>
 
 									<div className="space-y-2">
-										<label className={labelClass}>Balance/Equity</label>
+										<label className={labelClass}>Balance</label>
 										<input
 											type="number"
-											placeholder="Enter balance / equity"
+											placeholder="Enter balance"
 											{...register("balance", {
 												required: "Balance is required",
 											})}
@@ -317,9 +317,9 @@ const BillingDetails = () => {
 									</div>
 								</div>
 
-								<div className="rounded-2xl border border-purple-400/20 bg-purple-950/20 p-5">
+								<div className="rounded-2xl border border-white/10 bg-[#0c0d11] p-5">
 									<h2 className="text-xl font-bold text-white">Challenge Setup</h2>
-									<p className="mt-1 text-sm text-gray-400">Choose the challenge.</p>
+									<p className="mt-1 text-sm text-zinc-400">Choose the challenge.</p>
 
 									<div className="mt-5 space-y-2">
 										<label className={labelClass}>Select Challenge</label>
@@ -350,7 +350,7 @@ const BillingDetails = () => {
 								<button
 									type="submit"
 									disabled={createUser.isPending}
-									className="w-full rounded-xl bg-gradient-to-r from-purple-700 to-purple-500 px-10 py-3 font-bold text-white shadow-lg shadow-purple-900/40 transition duration-300 hover:from-purple-600 hover:to-purple-400 disabled:cursor-not-allowed disabled:from-purple-950 disabled:to-purple-950 disabled:text-gray-400">
+									className="w-full rounded-xl bg-violet-600 px-10 py-3 font-bold text-white shadow-lg shadow-violet-950/30 transition duration-300 hover:bg-violet-500 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500">
 									{createUser.isPending ? "Submitting..." : "Give Away Account"}
 								</button>
 							</form>
@@ -358,34 +358,34 @@ const BillingDetails = () => {
 					</div>
 
 					<div className="space-y-6">
-						<div className="rounded-2xl border border-purple-400/20 bg-[#09000d]/80 p-6 shadow-xl shadow-purple-950/25">
+						<div className="rounded-2xl border border-white/10 bg-[#111217] p-6 shadow-xl shadow-black/30">
 							<h2 className="text-xl font-bold text-white">Summary</h2>
-							<p className="mt-1 text-sm text-gray-400">
+							<p className="mt-1 text-sm text-zinc-400">
 								Review account creation details before submitting.
 							</p>
 
 							<div className="mt-6 space-y-4 text-sm">
 								<div className="flex items-center justify-between gap-4">
-									<span className="text-gray-400">Platform</span>
+									<span className="text-zinc-400">Platform</span>
 									<span className="font-semibold text-white">MT5</span>
 								</div>
 
 								<div className="flex items-center justify-between gap-4">
-									<span className="text-gray-400">Challenge</span>
+									<span className="text-zinc-400">Challenge</span>
 									<span className="text-right font-semibold text-white">
 										{selectedChallenge?.challengeName || "Not selected"}
 									</span>
 								</div>
 
 								<div className="flex items-center justify-between gap-4">
-									<span className="text-gray-400">Stage</span>
+									<span className="text-zinc-400">Stage</span>
 									<span className="font-semibold text-white">
 										{challengeStage || "Not selected"}
 									</span>
 								</div>
 
 								<div className="flex items-center justify-between gap-4">
-									<span className="text-gray-400">Group</span>
+									<span className="text-zinc-400">Group</span>
 									<span className="text-right font-semibold text-white">
 										{group || "Not selected"}
 									</span>
@@ -394,21 +394,23 @@ const BillingDetails = () => {
 						</div>
 
 						{result && (
-							<div className="rounded-2xl border border-purple-300/40 bg-purple-950/30 p-6 shadow-xl shadow-purple-950/30">
-								<h3 className="text-xl font-bold text-purple-200">Account assigned successfully</h3>
-								<p className="mt-2 text-sm text-purple-50">
+							<div className="rounded-2xl border border-emerald-500/25 bg-emerald-950/20 p-6 shadow-xl shadow-black/30">
+								<h3 className="text-xl font-bold text-emerald-300">
+									Account assigned successfully
+								</h3>
+								<p className="mt-2 text-sm text-emerald-50/90">
 									MT5 account was created and assigned successfully.
 								</p>
 
-								<div className="mt-5 rounded-xl border border-purple-300/20 bg-black/50 p-4 text-sm">
-									<p className="text-gray-300">
+								<div className="mt-5 rounded-xl border border-white/10 bg-black/35 p-4 text-sm">
+									<p className="text-zinc-300">
 										Account: <span className="font-bold text-white">{result.account}</span>
 									</p>
-									<p className="mt-2 text-gray-300">
+									<p className="mt-2 text-zinc-300">
 										Master Password:{" "}
 										<span className="font-bold text-white">{result.masterPassword}</span>
 									</p>
-									<p className="mt-2 text-gray-300">
+									<p className="mt-2 text-zinc-300">
 										Investor Password:{" "}
 										<span className="font-bold text-white">{result.investorPassword}</span>
 									</p>
