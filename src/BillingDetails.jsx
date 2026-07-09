@@ -304,10 +304,10 @@ const BillingDetails = () => {
 									</div>
 
 									<div className="space-y-2">
-										<label className={labelClass}>Balance</label>
+										<label className={labelClass}>Balance/Equity</label>
 										<input
 											type="number"
-											placeholder="Enter balance"
+											placeholder="Enter balance / equity"
 											{...register("balance", {
 												required: "Balance is required",
 											})}
